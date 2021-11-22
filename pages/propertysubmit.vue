@@ -1,85 +1,63 @@
 <template>
   <div>
-    <BreadCrumb :name="$nuxt.$route.name" />
+    <BreadCrumb :name="$nuxt.$route.name" image="submit-property.jpg" />
     <section class="property-submit-section spad">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <!-- <div
-              class="alert alert-success alert-dismissible fade show"
-              role="alert"
-              v-if="submitSuccess"
-            >
-              <div>
-                <i class="bi bi-check-circle-fill"></i>
-                Property Submit Succesfully
-              </div>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div> -->
             <div class="property-submit-form">
-              <form @submit.prevent="addProperty" ref="submitForm">
+              <form @submit.prevent="addProperty(property)" ref="submitForm">
                 <div class="pf-title">
                   <h4>Title</h4>
-                  <input type="text" placeholder="Your Title*" name="title" />
+                  <input
+                    type="text"
+                    placeholder="Your Title*"
+                    name="title"
+                    v-model="property.title"
+                  />
                   <!-- <span class="text-danger" v-if="submitError">{{
                     submitError.title[0]
                   }}</span> -->
                 </div>
                 <div class="pf-location">
                   <h4>Property Location</h4>
-                  <div class="location-inputs">
-                    <input
-                      type="text"
-                      placeholder="Address"
-                      autocomplete="off"
-                    />
-                    <input
-                      type="search"
-                      list="countries"
-                      placeholder="country"
-                      autocomplete="off"
-                      autofill="off"
-                    />
-                    <!-- <span class="text-danger">
+                  <div class="row">
+                    <div class="col-md-6 col-sm my-1">
+                      <input
+                        type="text"
+                        placeholder="Address"
+                        autocomplete="off"
+                        class="form-control"
+                        v-model="property.location.address"
+                      />
+                    </div>
+                    <div class="col-md-6 col-sm my-1">
+                      <select
+                        id="country"
+                        class="form-control"
+                        v-model="property.location.country_id"
+                      ></select>
+                      <!-- <span class="text-danger">
                       Please type valid country name
                     </span> -->
-                    <input
-                      type="search"
-                      placeholder="state"
-                      list="states"
-                      autocomplete="off"
-                    />
-                    <!-- <span class="text-danger" v-if="locationErr.state">
+                    </div>
+                    <div class="col-md-6 col-sm my-1">
+                      <select
+                        class="form-control"
+                        id="state"
+                        v-model="property.location.state_id"
+                      ></select>
+                      <!-- <span class="text-danger" v-if="locationErr.state">
                       Please type valid state name
                     </span> -->
-                    <input
-                      type="search"
-                      placeholder="city"
-                      list="cities"
-                      autocomplete="off"
-                    />
-                    <!-- <span class="text-danger" v-if="locationErr.city">
-                      Please type valid city name
-                    </span> -->
-                    <!-- <datalist id="cities">
-                      <option
-                        v-for="city in cities"
-                        :data-value="city.id"
-                        :key="city.id"
-                        :value="city.name"
-                      />
-                    </datalist> -->
-
-                    <input
-                      type="text"
-                      placeholder="Posta Code / Zip"
-                      tocomplete="off"
-                    />
+                    </div>
+                    <div class="col-md-6 col-sm my-1">
+                      <select
+                        class="form-control"
+                        id="city"
+                        v-model="property.location.city_id"
+                      ></select>
+                    </div>
                   </div>
                 </div>
                 <div class="pf-type">
@@ -98,6 +76,7 @@
                         :id="propertyType"
                         name="type"
                         :value="propertyType"
+                        v-model="property.type"
                       />
                       <span class="checkbox"></span>
                     </label>
@@ -119,6 +98,7 @@
                         :id="propertyStatus"
                         name="status"
                         :value="propertyStatus"
+                        v-model="property.status"
                       />
                       <span class="checkbox"></span>
                     </label>
@@ -130,7 +110,12 @@
                 <div class="pf-feature-price">
                   <h4>Featured Price</h4>
                   <div class="fp-inputs">
-                    <input type="text" placeholder="Price" name="price" />
+                    <input
+                      type="text"
+                      placeholder="Price"
+                      name="price"
+                      v-model="property.price"
+                    />
                   </div>
                   <!-- <span class="text-danger" v-if="submitError">{{
                     submitError.price[0]
@@ -154,6 +139,7 @@
                           :id="feature"
                           name="feature[]"
                           :value="feature"
+                          v-model="property.featured"
                         />
                         <span class="checkbox"></span>
                       </label>
@@ -197,27 +183,19 @@
                   <div class="property-details-inputs">
                     <input
                       type="text"
-                      placeholder="Property ID"
-                      name="property_id"
-                    />
-                    <input
-                      type="text"
                       placeholder="Area Size ( Only digits )"
                       name="size"
+                      v-model="property.size"
                     />
                     <!-- <span class="text-danger" v-if="submitError">{{
                       submitError.size[0]
                     }}</span> -->
-                    <input
-                      type="text"
-                      placeholder="Size Prefix"
-                      name="prefix"
-                    />
                     <input type="text" placeholder="Bedrooms" name="bedrooms" />
                     <input
                       type="text"
                       placeholder="Bathrooms"
                       name="bathrooms"
+                      v-model="property.bathroom"
                     />
                     <!-- <span class="text-danger" v-if="submitError">{{
                       submitError.bathrooms[0]
@@ -230,6 +208,7 @@
                       type="text"
                       placeholder="Year Built"
                       name="year_built"
+                      v-model="property.year"
                     />
                     <!-- <span class="text-danger" v-if="submitError">{{
                       submitError.year_built[0]
@@ -238,14 +217,16 @@
                       type="text"
                       name="tour_url"
                       placeholder="Virtual Tour Video URL"
+                      v-model="property.video_url"
                     />
                   </div>
-                  <button type="submit" class="site-btn">
+                  <button type="submit" class="site-btn" :disabled="isAdding">
                     Submit Property
                     <span
                       class="spinner-border spinner-border-sm"
                       role="status"
                       aria-hidden="true"
+                      v-if="isAdding"
                     ></span>
                   </button>
                   <!-- <span class="text-danger" v-if="formSubmitError"
@@ -262,8 +243,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import TomSelect from "tom-select";
+import "tom-select/dist/css/tom-select.bootstrap5.min.css";
+
 export default {
+  loading:false,
   head() {
     return {
       title: "Aler | Submit",
@@ -272,19 +257,42 @@ export default {
   data() {
     return {
       imagePreviews: [],
+      property: {
+        title: "",
+        location: {
+          address: "",
+          country_id: "",
+          state_id: "",
+          city_id: "",
+        },
+        type: "",
+        status: "",
+        price: "",
+        featured: [],
+        images: {},
+        property_id: "",
+        size: "",
+        bathroom: "",
+        bedroom: "",
+        garage: "",
+        year: "",
+        video_url: "",
+      },
     };
+  },
+  async asyncData({ params, $axios }) {
+    return {};
   },
   computed: {
     ...mapState(["propertyStatus", "propertyFeatures", "propertyTypes"]),
+    ...mapState("property", ["isAdding"]),
   },
   methods: {
-    addProperty() {
-      console.log("hello");
-    },
+    ...mapActions("property", ["countrySelect", "addProperty"]),
     addImage(e) {
       const previews = [];
       this.imagePreviews = [];
-      
+      this.property.image = [];
       Array.from(e.target.files).map((file) => {
         const reader = new FileReader();
         reader.onload = (e) => previews.push(reader.result);
@@ -292,9 +300,59 @@ export default {
       });
 
       this.imagePreviews = previews;
+      this.property.image = e.target.files;
     },
+  },
+  mounted() {
+    let _this = this;
+    _this.countrySelect();
+    new TomSelect("#state", {
+      valueField: "id",
+      labelField: "name",
+      searchField: "name",
+      closeAfterSelect: true,
+      placeholder: "Select State",
+      load: async function (query, callback) {
+        const response = await _this.$axios.get(`states`, {
+          params: {
+            country_id: _this.property.location.country_id,
+            name: query,
+          },
+        });
+        callback(response.data);
+      },
+    });
+
+    new TomSelect("#city", {
+      valueField: "id",
+      labelField: "name",
+      searchField: "name",
+      closeAfterSelect: true,
+      placeholder: "Select City",
+      load: async function (query, callback) {
+        console.log(_this.property.location.state_id);
+        const response = await _this.$axios.get(`cities`, {
+          params: {
+            state_id: _this.property.location.state_id,
+            name: query,
+          },
+        });
+        callback(response.data);
+      },
+    });
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+input:focus,
+button:focus,
+button:active,
+select:focus,
+.form-control:focus .ts-control input:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  border: 1px solid #00c89d;
+}
+</style>

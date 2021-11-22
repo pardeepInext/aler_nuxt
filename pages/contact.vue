@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BreadCrumb :name="$nuxt.$route.name" />
+    <BreadCrumb :name="$nuxt.$route.name" image="contact.jpg" />
     <section class="contact-form-section spad">
       <div class="container">
         <div class="row">

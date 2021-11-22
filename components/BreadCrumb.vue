@@ -2,7 +2,9 @@
   <section
     class="breadcrumb-section spad set-bg"
     data-setbg="img/breadcrumb-bg.jpg"
-    :style="{ backgroundImage: `url('img/breadcrumb-bg.jpg')` }"
+    :style="{
+      backgroundImage: `url('img/breadcrumb/${this.image || 'deafult.jpg'}')`,
+    }"
   >
     <div class="container">
       <div class="row">
@@ -22,7 +24,7 @@
 
 <script>
 export default {
-  props: ["name"],
+  props: ["name", "image"],
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
- <div>
-   <BreadCrumb :name="$nuxt.$route.name" />
- </div>
+  <div>
+    <BreadCrumb :name="$nuxt.$route.name" image="property.jpg" />
+  </div>
 </template>
 
 <script>

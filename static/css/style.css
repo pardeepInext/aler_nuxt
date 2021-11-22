@@ -2324,7 +2324,7 @@ ol {
   margin-right: -20px;
   overflow: hidden;
 }
-.property-submit-form form .pf-location .location-inputs input {
+.property-submit-form form .pf-location .location-inputs input,select {
   width: calc(33.33% - 20px);
   float: left;
   margin-right: 20px;

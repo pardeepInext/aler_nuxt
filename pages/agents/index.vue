@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BreadCrumb :name="$nuxt.$route.name" />
+    <BreadCrumb :name="$nuxt.$route.name" image="agents.jpg" />
   </div>
 </template>
 

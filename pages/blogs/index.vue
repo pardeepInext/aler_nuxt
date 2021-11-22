@@ -1,5 +1,5 @@
 <template>
-  <BreadCrumb :name="$nuxt.$route.name" />
+  <BreadCrumb :name="$nuxt.$route.name" image="blog.jpg" />
 </template>
 
 <script>

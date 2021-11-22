@@ -15,10 +15,17 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
+  axios: {
+    baseURL: 'https://aler-postgres-api.herokuapp.com/api/',
+  },
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: 'https://aler-postgres-api.herokuapp.com/api/'
+    }
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-   
+
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -35,9 +42,15 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  // loading: {
+  //   color: '#00c89e',
+  //   height: '3px'
+  // }
+  
 }
