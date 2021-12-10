@@ -6,9 +6,11 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "^5.0.0-1637745161.ea53f98",
     "@nuxtjs/axios": "^5.13.6",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.1.3",

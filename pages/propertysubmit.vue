@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="property-submit-form">
-              <form @submit.prevent="addProperty(property)" ref="submitForm">
+              <form @submit.prevent="addProperty($refs.submitForm)" ref="submitForm">
                 <div class="pf-title">
                   <h4>Title</h4>
                   <input
@@ -15,9 +15,9 @@
                     name="title"
                     v-model="property.title"
                   />
-                  <!-- <span class="text-danger" v-if="submitError">{{
-                    submitError.title[0]
-                  }}</span> -->
+                  <span class="text-danger" v-if="addingError.title">{{
+                    addingError.title[0]
+                  }}</span>
                 </div>
                 <div class="pf-location">
                   <h4>Property Location</h4>
@@ -28,35 +28,53 @@
                         placeholder="Address"
                         autocomplete="off"
                         class="form-control"
+                        name="location[address]"
                         v-model="property.location.address"
                       />
+                      <span
+                        class="text-danger"
+                        v-if="addingError['location.address']"
+                        >{{ addingError["location.address"][0] }}</span
+                      >
                     </div>
                     <div class="col-md-6 col-sm my-1">
                       <select
                         id="country"
                         class="form-control"
+                        name="location[country_id]"
                         v-model="property.location.country_id"
                       ></select>
-                      <!-- <span class="text-danger">
-                      Please type valid country name
-                    </span> -->
+                      <span
+                        class="text-danger"
+                        v-if="addingError['location.country_id']"
+                        >{{ addingError["location.country_id"][0] }}</span
+                      >
                     </div>
                     <div class="col-md-6 col-sm my-1">
                       <select
                         class="form-control"
                         id="state"
+                        name="location[state_id]"
                         v-model="property.location.state_id"
                       ></select>
-                      <!-- <span class="text-danger" v-if="locationErr.state">
-                      Please type valid state name
-                    </span> -->
+                      <span
+                        class="text-danger"
+                        v-if="addingError['location.state_id']"
+                        >{{ addingError["location.state_id"][0] }}</span
+                      >
                     </div>
                     <div class="col-md-6 col-sm my-1">
                       <select
                         class="form-control"
                         id="city"
+                        name="location[city_id]"
                         v-model="property.location.city_id"
                       ></select>
+                      <span
+                        class="text-danger"
+                        v-if="addingError['location.city_id']"
+                        >{{ addingError["location.city_id"][0] }}</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -69,7 +87,6 @@
                       :key="index"
                       class="text-capitalize"
                     >
-                      <!-- to change property type in Titlecase -->
                       {{ propertyType }}
                       <input
                         type="radio"
@@ -81,9 +98,9 @@
                       <span class="checkbox"></span>
                     </label>
                   </div>
-                  <!-- <span class="text-danger" v-if="submitError">{{
-                    submitError.type[0]
-                  }}</span> -->
+                  <span class="text-danger" v-if="addingError.status">{{
+                    addingError.status[0]
+                  }}</span>
                 </div>
                 <div class="pf-status">
                   <h4>Property status</h4>
@@ -103,9 +120,9 @@
                       <span class="checkbox"></span>
                     </label>
                   </div>
-                  <!-- <span class="text-danger" v-if="submitError">{{
-                    submitError.status[0]
-                  }}</span> -->
+                  <span class="text-danger" v-if="addingError.type">{{
+                    addingError.type[0]
+                  }}</span>
                 </div>
                 <div class="pf-feature-price">
                   <h4>Featured Price</h4>
@@ -117,9 +134,9 @@
                       v-model="property.price"
                     />
                   </div>
-                  <!-- <span class="text-danger" v-if="submitError">{{
-                    submitError.price[0]
-                  }}</span> -->
+                  <span class="text-danger" v-if="addingError.price">{{
+                    addingError.price[0]
+                  }}</span>
                 </div>
                 <div class="pf-feature">
                   <h4>Property Features</h4>
@@ -137,13 +154,16 @@
                         <input
                           type="checkbox"
                           :id="feature"
-                          name="feature[]"
+                          name="features[]"
                           :value="feature"
                           v-model="property.featured"
                         />
                         <span class="checkbox"></span>
                       </label>
                     </div>
+                    <span class="text-danger" v-if="addingError.features">{{
+                      addingError.features[0]
+                    }}</span>
                   </div>
                 </div>
                 <div class="pf-feature-image">
@@ -159,7 +179,7 @@
                       <input
                         type="file"
                         class="d-none"
-                        name="image[]"
+                        name="images[]"
                         id="image-input"
                         multiple
                         accept="image/*"
@@ -187,38 +207,50 @@
                       name="size"
                       v-model="property.size"
                     />
-                    <!-- <span class="text-danger" v-if="submitError">{{
-                      submitError.size[0]
-                    }}</span> -->
-                    <input type="text" placeholder="Bedrooms" name="bedrooms" />
+                    <input
+                      type="text"
+                      placeholder="Bedrooms"
+                      name="bedrooms"
+                      v-model="property.bedroom"
+                    />
                     <input
                       type="text"
                       placeholder="Bathrooms"
-                      name="bathrooms"
+                      name="bathroom"
                       v-model="property.bathroom"
                     />
-                    <!-- <span class="text-danger" v-if="submitError">{{
-                      submitError.bathrooms[0]
-                    }}</span> -->
-                    <input type="text" placeholder="Garages" name="garages" />
-                    <!-- <span class="text-danger" v-if="submitError">{{
-                      submitError.garages[0]
-                    }}</span> -->
+                    <input
+                      type="text"
+                      placeholder="Garages"
+                      name="garages"
+                      v-model="property.garage"
+                    />
                     <input
                       type="text"
                       placeholder="Year Built"
-                      name="year_built"
+                      name="year"
                       v-model="property.year"
                     />
-                    <!-- <span class="text-danger" v-if="submitError">{{
-                      submitError.year_built[0]
-                    }}</span> -->
                     <input
                       type="text"
                       name="tour_url"
                       placeholder="Virtual Tour Video URL"
                       v-model="property.video_url"
                     />
+                  </div>
+                  <div style="display: inline-grid">
+                    <span class="text-danger" v-if="addingError.size">{{
+                      addingError.size[0]
+                    }}</span>
+                    <span class="text-danger" v-if="addingError.bathroom">{{
+                      addingError.bathroom[0]
+                    }}</span>
+                    <span class="text-danger" v-if="addingError.garages">{{
+                      addingError.garages[0]
+                    }}</span>
+                    <span class="text-danger" v-if="addingError.year">{{
+                      addingError.year[0]
+                    }}</span>
                   </div>
                   <button type="submit" class="site-btn" :disabled="isAdding">
                     Submit Property
@@ -229,9 +261,6 @@
                       v-if="isAdding"
                     ></span>
                   </button>
-                  <!-- <span class="text-danger" v-if="formSubmitError"
-                    >Please fill all information</span
-                  > -->
                 </div>
               </form>
             </div>
@@ -246,9 +275,9 @@
 import { mapState, mapActions } from "vuex";
 import TomSelect from "tom-select";
 import "tom-select/dist/css/tom-select.bootstrap5.min.css";
-
+import { Notify } from "notiflix";
 export default {
-  loading:false,
+  loading: false,
   head() {
     return {
       title: "Aler | Submit",
@@ -258,6 +287,7 @@ export default {
     return {
       imagePreviews: [],
       property: {
+        user_id: 2,
         title: "",
         location: {
           address: "",
@@ -265,11 +295,11 @@ export default {
           state_id: "",
           city_id: "",
         },
+        images: {},
         type: "",
         status: "",
         price: "",
         featured: [],
-        images: {},
         property_id: "",
         size: "",
         bathroom: "",
@@ -280,12 +310,9 @@ export default {
       },
     };
   },
-  async asyncData({ params, $axios }) {
-    return {};
-  },
   computed: {
     ...mapState(["propertyStatus", "propertyFeatures", "propertyTypes"]),
-    ...mapState("property", ["isAdding"]),
+    ...mapState("property", ["isAdding", "addingError"]),
   },
   methods: {
     ...mapActions("property", ["countrySelect", "addProperty"]),
@@ -300,7 +327,7 @@ export default {
       });
 
       this.imagePreviews = previews;
-      this.property.image = e.target.files;
+      this.property.images = e.target.files;
     },
   },
   mounted() {
@@ -355,4 +382,5 @@ select:focus,
   box-shadow: none !important;
   border: 1px solid #00c89d;
 }
+
 </style>

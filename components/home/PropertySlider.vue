@@ -1,36 +1,52 @@
 <template>
   <section class="hero-section">
     <hooper :settings="hooperSettings" style="height: 780px">
-      <slide
-        v-for="(image, index) in slideImages"
-        :key="index"
-        @update="() => console.log('fdsafds')"
-      >
+      <slide v-for="(property, index) in properties" :key="index">
         <div style="padding: 0 5%">
           <div
             class="hs-item set-bg"
-            :style="{ backgroundImage: `url('img/hero/${image}')` }"
+            :style="{ backgroundImage: `url('img/hero/hero-${index}.jpg')` }"
           >
             <div class="row">
               <div class="col-lg-12">
-                <div class="hc-inner-text">
-                  <div class="hc-text">
-                    <h4>Balaji Symphony</h4>
-                    <p>
-                      <span class="icon_pin_alt"></span> Panvel, Navi Mumbai
-                    </p>
-                    <div class="label">For Rent</div>
-                    <h5>$ 65.0<span>/month</span></h5>
+                <NuxtLink
+                  :to="`/properties/${property.id}`"
+                >
+                  <div class="hc-inner-text">
+                    <div class="hc-text">
+                      <h4>{{ property.title }}</h4>
+                      <p class="text-capitalize">
+                        <span class="icon_pin_alt"></span>
+                        {{ property.property_location.address }},
+                        {{ property.property_location.city.name }},
+                        {{ property.property_location.state.name }},
+                        {{ property.property_location.country.name }}
+                      </p>
+                      <div class="label">For {{ property.status }}</div>
+                      <h5>
+                        $ {{ property.price
+                        }}<span v-if="property.status == 'rent'">/month</span>
+                      </h5>
+                    </div>
+                    <div class="hc-widget">
+                      <ul>
+                        <li>
+                          <i class="fa fa-object-group"></i> {{ property.size }}
+                        </li>
+                        <li>
+                          <i class="fa fa-bathtub"></i> {{ property.bathroom }}
+                        </li>
+                        <li>
+                          <i class="fa fa-bed"></i> {{ property.bedrooms }}
+                        </li>
+                        <li>
+                          <i class="fa fa-automobile"></i>
+                          {{ property.garages }}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <div class="hc-widget">
-                    <ul>
-                      <li><i class="fa fa-object-group"></i> 2, 283</li>
-                      <li><i class="fa fa-bathtub"></i> 03</li>
-                      <li><i class="fa fa-bed"></i> 05</li>
-                      <li><i class="fa fa-automobile"></i> 01</li>
-                    </ul>
-                  </div>
-                </div>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -46,6 +62,7 @@ import { Hooper, Slide, Navigation as HooperNavigation } from "hooper";
 import "hooper/dist/hooper.css";
 export default {
   components: { Hooper, Slide, HooperNavigation },
+  props: ["properties"],
   data() {
     return {
       hooperSettings: {

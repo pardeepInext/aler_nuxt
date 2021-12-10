@@ -1269,7 +1269,7 @@ ol {
 -----------------------*/
 .categories-section {
   overflow: hidden;
-  padding-top: 10px;
+  padding: 10px 0;
 }
 
 .cs-item-list {
@@ -2042,6 +2042,7 @@ ol {
 }
 .property-sidebar .single-sidebar .top-agent .ta-item {
   overflow: hidden;
+  border: 1px solid #EBEBEB;
   margin-bottom: 30px;
 }
 .property-sidebar .single-sidebar .top-agent .ta-item .ta-pic {
@@ -3403,6 +3404,12 @@ li .richText-btn[data-command="toggleCode"] {
 }
 .cf-content .cc-form textarea {
   margin-bottom: 10px;
+}
+
+.loadmore-btn a,
+.loadmore-btn a:hover {
+  color: #fff;
+  cursor: pointer;
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/

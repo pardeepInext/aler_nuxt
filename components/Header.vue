@@ -68,10 +68,10 @@
                   <li v-for="(menu, index) in menus" :key="index">
                     <NuxtLink
                       :to="
-                        menu.hasOwnProperty('subMenus')
-                          ? 'javascript:void(0);'
-                          : menu.link
+                        !menu.hasOwnProperty('subMenus')
+                         ? menu.link : '#'
                       "
+                      :disabled="menu.hasOwnProperty('subMenus')"
                       >{{ menu.name }}</NuxtLink
                     >
                     <ul class="dropdown" v-if="menu.hasOwnProperty('subMenus')">

@@ -4,13 +4,13 @@
     <section class="categories-section">
       <div class="cs-item-list">
         <property-count
-          v-for="(counter, index) in counters"
+          v-for="(counter, index) in data.count"
           :key="index"
           :propertyCount="counter"
         />
       </div>
     </section>
-    <property-slider />
+    <property-slider :properties="data.properties" />
     <agent-listing />
     <why-choo-us />
   </div>
@@ -36,6 +36,10 @@ export default {
     return {
       title: "Aler | Home",
     };
+  },
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get("home");
+    return { data };
   },
   data() {
     return {

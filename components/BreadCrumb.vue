@@ -3,7 +3,7 @@
     class="breadcrumb-section spad set-bg"
     data-setbg="img/breadcrumb-bg.jpg"
     :style="{
-      backgroundImage: `url('img/breadcrumb/${this.image || 'deafult.jpg'}')`,
+      backgroundImage: `url('/img/breadcrumb/${this.image || 'deafult.jpg'}')`,
     }"
   >
     <div class="container">
@@ -13,6 +13,7 @@
             <h4>{{ name }}</h4>
             <div class="bt-option">
               <Nuxt-Link to="/"><i class="fa fa-home"></i> Home</Nuxt-Link>
+              <slot />
               <span class="text-capitalize">{{ name }}</span>
             </div>
           </div>

@@ -1,7 +1,7 @@
 <template>
   <div
     class="cs-item set-bg"
-    :style="{ backgroundImage: `url('img/categories/${propertyCount.img}')` }"
+    :style="{ backgroundImage: `url('img/categories/${propertyCount.type}.jpg')` }"
   >
     <div class="cs-text">
       <h5>{{ propertyCount.type }}</h5>
