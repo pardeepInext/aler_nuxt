@@ -4,4 +4,6 @@ export default () => ({
   addingError: {},
   properties: {},
   isPropertyFetched: false,
+  propertyList: {},
+  ispropertyListFetched: false,
 });

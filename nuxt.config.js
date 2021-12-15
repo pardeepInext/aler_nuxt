@@ -14,12 +14,12 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   axios: {
-    baseURL: "http://127.0.0.1:8000/api/",
+    baseURL: "https://aler-postgres-api.herokuapp.com/api/",
     credentials: true,
   },
   publicRuntimeConfig: {
     axios: {
-      baseURL: "http://127.0.0.1:8000/api/",
+      baseURL: "https://aler-postgres-api.herokuapp.com/api/",
     },
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -35,44 +35,36 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth-next"],
+  modules: ["@nuxtjs/axios",'cookie-universal-nuxt'],
   // next-auth configration
-  auth: {
-    strategies: {
-      cookie: {
-        endpoints: {
-          csrf: {
-            url: "/sanctum/csrf-cookie",
-          },
-          login: {
-            url: "/login",
-          },
-          logout: {
-            url: "/logout",
-          },
-          user: {
-            url: "/user",
-          },
-        },
-        user:{
-          property:'data'
-        }
-      },
-    },
-    redirect:{
-      login:'/login',
-      logout:'/logout',
-      home:'/'
-    },
-    plugins:['~/plugins/axios']
-  },
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: "login", method: "post" },
+  //         // user: { url: "me", method: "get", propertyName: "data" },
+  //         logout: false,
+  //       },
+  //       token: {
+  //         property: "token",
+  //         global: true,
+  //         // required: true,
+  //         // type: 'Bearer'
+  //       },
+  //       user: {
+  //         property: "user",
+  //         // autoFetch: true
+  //       },
+  //     },
+  //   },
+  //   plugins: ["~/plugins/axios"],
+  // },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  // loading: {
-  //   color: '#00c89e',
-  //   height: '3px'
-  // }
+  loading: {
+    color: '#00c89e',
+  },
   router: {
     scrollBehavior(to, from, savedPosition) {
       if (savedPosition) {

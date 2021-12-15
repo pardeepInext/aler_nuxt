@@ -35,8 +35,14 @@ export const state = () => ({
     "Nov",
     "Dec",
   ],
+  menuToggle: false,
 });
 
+export const mutations = {
+  Menu_Toggle: (state, paylaod) => (state.menuToggle = paylaod),
+};
+
 export const actions = {
- 
+  menuToggleAction: ({ state, commit }) =>
+    commit("Menu_Toggle", !state.menuToggle),
 };

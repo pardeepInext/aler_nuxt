@@ -50,7 +50,17 @@
                     <span>125-668-886</span>
                   </li>
                 </ul>
-                <a href="#" class="hw-btn">Submit property</a>
+                <button
+                  v-if="$cookies.get('user') || isLogedIn"
+                  class="hw-btn"
+                  style="border: none"
+                  @click="logout"
+                  :disabled="isLogout"
+                >
+                  <i class="fa fa-spin fa-spinner" v-if="isLogout"></i>
+                  Logout
+                </button>
+                <NuxtLink to="login" class="hw-btn" v-else>Login</NuxtLink>
               </div>
             </div>
           </div>
@@ -67,10 +77,7 @@
                 <ul>
                   <li v-for="(menu, index) in menus" :key="index">
                     <NuxtLink
-                      :to="
-                        !menu.hasOwnProperty('subMenus')
-                         ? menu.link : '#'
-                      "
+                      :to="!menu.hasOwnProperty('subMenus') ? menu.link : '#'"
                       :disabled="menu.hasOwnProperty('subMenus')"
                       >{{ menu.name }}</NuxtLink
                     >
@@ -98,7 +105,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -143,8 +150,10 @@ export default {
   },
   computed: {
     ...mapState(["footerMenus"]),
+    ...mapState("authenticate", ["isLogedIn", "isLogout"]),
   },
   methods: {
+    ...mapActions("authenticate", ["logout"]),
     menuToggle() {
       this.isToggle = !this.isToggle;
       console.log(this.isToggle);
@@ -166,7 +175,7 @@ export default {
 .offcanvas-menu-wrapper {
   border-right: 1px solid #ebebeb;
 }
-.nuxt-link-exact-active {
+.nav-menu .nuxt-link-exact-active {
   color: #00c89e !important;
 }
 </style>

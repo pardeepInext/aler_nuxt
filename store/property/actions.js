@@ -64,4 +64,25 @@ export default {
         Notify.failure("Server error please try again!");
       });
   },
+  /**
+   * property list for admin
+   */
+  async propertyListFetch({ commit }, page = 1) {
+    Block.hourglass("#property-list-admin");
+
+    commit("IspropertyListFetched", true);
+
+    await this.$axios
+      .get("properties", { params: { page: page } })
+      .then((res) => {
+        Block.remove("#property-list-admin");
+        commit("IspropertyListFetched", false);
+        commit("PropertyList", res.data);
+      })
+      .catch((e) => {
+        Block.remove("#property-list-admin");
+        commit("IspropertyListFetched", false);
+        Notify.failure("Server error please try again!");
+      });
+  },
 };

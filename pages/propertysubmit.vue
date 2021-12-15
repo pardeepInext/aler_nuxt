@@ -6,7 +6,10 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="property-submit-form">
-              <form @submit.prevent="addProperty($refs.submitForm)" ref="submitForm">
+              <form
+                @submit.prevent="addProperty($refs.submitForm)"
+                ref="submitForm"
+              >
                 <div class="pf-title">
                   <h4>Title</h4>
                   <input
@@ -382,5 +385,4 @@ select:focus,
   box-shadow: none !important;
   border: 1px solid #00c89d;
 }
-
 </style>

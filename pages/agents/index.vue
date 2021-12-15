@@ -13,8 +13,11 @@
             </div>
           </div>
         </div>
-        <div class="row" id="agent-list">
+        <div class="row" id="agent-list" v-if="agents.length > 0">
           <agent v-for="agent in agents" :key="agent.id" :agent="agent" />
+        </div>
+        <div v-else class="row section-title">
+          <h4>No Agents Available</h4>
         </div>
         <div class="row" v-if="currentPage < lastPage">
           <div class="col-lg-12">
@@ -53,4 +56,3 @@ export default {
   },
 };
 </script>
-
