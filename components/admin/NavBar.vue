@@ -89,9 +89,11 @@
                 "
               >
                 <li>
-                  <a href="#0"> <i class="lni lni-user"></i> View Profile </a>
+                  <NuxtLink to="/admin/setting">
+                    <i class="lni lni-cog"></i> Settings
+                  </NuxtLink>
                 </li>
-              
+
                 <li>
                   <a style="cursor: pointer" @click="logout">
                     <i class="lni lni-exit"></i> Sign Out

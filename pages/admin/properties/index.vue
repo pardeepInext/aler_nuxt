@@ -18,7 +18,12 @@
                   </tr>
                   <!-- end table row-->
                 </thead>
-                <tbody>
+                <tbody
+                  v-if="
+                    propertyList.hasOwnProperty('data') &&
+                    propertyList.data.length > 0
+                  "
+                >
                   <tr v-for="property in propertyList.data" :key="property.id">
                     <td class="min-width">
                       <div class="lead">
@@ -52,6 +57,13 @@
                           <i class="lni lni-eye"></i>
                         </NuxtLink>
                       </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody v-else>
+                  <tr>
+                    <td class="min-width text-center" colspan="5">
+                      No property available
                     </td>
                   </tr>
                 </tbody>

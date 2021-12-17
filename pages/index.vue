@@ -24,7 +24,6 @@ import WhyChoosUs from "../components/home/WhyChooUs";
 import WhyChooUs from "../components/home/WhyChooUs.vue";
 import AgentListing from "../components/home/AgentListing";
 export default {
-  middleware: ["authenticated"],
   components: {
     PropertyCount,
     SearchBanner,

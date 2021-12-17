@@ -14,19 +14,22 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   axios: {
-    baseURL: "https://aler-postgres-api.herokuapp.com/api/",
-    credentials: true,
+    // baseURL: "http://127.0.0.1:8000/api/",
+    baseURL: "http://192.168.1.51:8000/api/",
+    // credentials: true,
   },
   publicRuntimeConfig: {
     axios: {
-      baseURL: "https://aler-postgres-api.herokuapp.com/api/",
+      // baseURL: "http://127.0.0.1:8000/api/",
+      baseURL: "http://192.168.1.51:8000/api",
+      // credentials: true,
     },
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/assets/js/bootstrap.bundle.min.js", mode: "client" }],
+  plugins: [{ src: "~/assets/js/bootstrap.js", mode: "client" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -35,7 +38,7 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios",'cookie-universal-nuxt'],
+  modules: ["@nuxtjs/axios", "cookie-universal-nuxt"],
   // next-auth configration
   // auth: {
   //   strategies: {
@@ -63,7 +66,7 @@ export default {
   build: {},
 
   loading: {
-    color: '#00c89e',
+    color: "#00c89e",
   },
   router: {
     scrollBehavior(to, from, savedPosition) {

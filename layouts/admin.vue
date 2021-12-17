@@ -96,7 +96,6 @@ export default {
   computed: {
     ...mapState(["menuToggle"]),
   },
-  pageTransition: "fade",
   loading: {
     color: "#4a6cf7",
   },
@@ -107,9 +106,10 @@ export default {
   mounted() {
     this.fetchCurrentUser();
   },
+  pageTransition: "fade",
 };
 </script>
-<style scoped>
+<style>
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.8s;

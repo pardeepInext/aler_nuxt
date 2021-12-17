@@ -2,7 +2,7 @@
   <aside class="sidebar-nav-wrapper" :class="menuToggle && 'active'">
     <div class="navbar-logo">
       <NuxtLink to="/">
-        <img src="/admin/images/logo/logo.svg" alt="logo" />
+        <img src="~/assets/img/logo.png" alt="logo" />
       </NuxtLink>
     </div>
     <nav class="sidebar-nav">
@@ -47,7 +47,7 @@
         <span class="divider"><hr /></span>
 
         <li class="nav-item">
-          <a href="notification.html">
+          <NuxtLink to="/admin/notification">
             <span class="icon">
               <svg
                 width="22"
@@ -62,7 +62,15 @@
               </svg>
             </span>
             <span class="text">Notifications</span>
-          </a>
+          </NuxtLink>
+        </li>
+        <li class="nav-item">
+          <NuxtLink to="/admin/setting">
+            <span class="icon">
+              <i class="lni lni-cog"></i>
+            </span>
+            <span class="text">Setting</span>
+          </NuxtLink>
         </li>
       </ul>
     </nav>

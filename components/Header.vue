@@ -61,6 +61,15 @@
                   Logout
                 </button>
                 <NuxtLink to="login" class="hw-btn" v-else>Login</NuxtLink>
+                <NuxtLink
+                  to="/admin"
+                  class="hw-btn"
+                  v-if="
+                    ($cookies.get('user') || isLogedIn) &&
+                    $cookies.get('user').role_id == 1
+                  "
+                  >Dashboard</NuxtLink
+                >
               </div>
             </div>
           </div>

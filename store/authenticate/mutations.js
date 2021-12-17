@@ -5,4 +5,6 @@ export default {
   Is_LogedIn: (state, payload) => (state.isLogedIn = payload),
   Is_Logout: (state, payload) => (state.isLogout = payload),
   Current_User: (state, payload) => (state.currentUser = payload),
+  IsUpdating: (state, payload) => (state.isUpdating = payload),
+  UpdatingError: (state, payload) => (state.updatingError = payload),
 };

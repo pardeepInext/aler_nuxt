@@ -5,10 +5,12 @@
         <div class="col-md-6 order-last order-md-first">
           <div class="copyright text-center text-md-start">
             <p class="text-sm">
-              Designed and Developed by
+              Designed by
               <a href="https://plainadmin.com" rel="nofollow" target="_blank">
                 PlainAdmin
               </a>
+              & Develope By 
+              <a href="javascript:void(0);">Pardeep Kumar</a>
             </p>
           </div>
         </div>

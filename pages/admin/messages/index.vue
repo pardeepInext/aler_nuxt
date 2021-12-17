@@ -18,7 +18,9 @@
                     <th><h6>Action</h6></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody
+                  v-if="messages.hasOwnProperty('data') && messages.data.length > 0"
+                >
                   <tr v-for="message in messages.data" :key="message.id">
                     <td class="min-width">
                       <p>{{ message.name }}</p>
@@ -53,6 +55,13 @@
                           <i class="mdi mdi-message-reply-outline"></i>
                         </NuxtLink>
                       </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody v-else>
+                  <tr>
+                    <td class="min-width text-center" colspan="5">
+                      No messages available
                     </td>
                   </tr>
                 </tbody>

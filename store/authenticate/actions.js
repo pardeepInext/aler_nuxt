@@ -61,10 +61,37 @@ export default {
       .get(`/users/${id}`)
       .then((res) => {
         commit("Current_User", res.data);
-        console.log(res.data);
       })
       .catch((e) => {
         Notify.failure("server error please try again!");
+      });
+  },
+
+  /**
+   * update profile
+   */
+
+  async updateProfile({ commit, state }, form) {
+    commit("IsUpdating", true);
+    const data = new FormData(form);
+    await this.$axios
+      .post(`/profile/${state.currentUser.id}`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        if (res.data.success) {
+          commit("Current_User", res.data.user);
+          Notify.success("profile has been updated");
+          this.$router.push("/admin");
+          commit("UpdatingError", {});
+        } else commit("UpdatingError", res.data.errors);
+        commit("IsUpdating", false);
+      })
+      .catch((e) => {
+        Notify.failure("Server Error Please try again");
+        commit("IsUpdating", false);
       });
   },
 };
